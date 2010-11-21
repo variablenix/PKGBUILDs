@@ -1,0 +1,34 @@
+# Contributor: CRT<crt.011@gmail.com>
+
+pkgname=barnyard
+pkgver=0.2.0
+pkgrel=1
+pkgdesc="Output spool reader for Snort"
+arch=('any')
+url="http://barnyard.sourceforge.net"
+license=('QPL')
+backup=()
+options=(docs)
+source=("http://sourceforge.net/projects/barnyard/files/barnyard-0.2/0.2.0/${pkgname}-${pkgver}.tar.gz"
+"http://layer3link.info/builds/barnyard/barnyard-0.2.0-1.patch")
+sha512sums=('73424acf2e0c620b2f8f2f407d74812f7740234ce523e37557273998108c131311fffb16cfc2cea0f652d6b21072431081bad35b045f5654e2245786d27568e6'
+            '0fa9506d559c830621f5a4831d48fb17ca948d985ab8555a18ddd10404fb789ff95b3806a4c4b7eba1c8af8b667e5f390f1fa6355f0de009fb71f4e07c4aabb3')
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  patch -Np1 -i ../barnyard-0.2.0-1.patch 
+  ./configure --prefix=/usr --sysconfdir=/etc --enable-mysql
+  make 
+}
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}/" install 
+  install -d "${pkgdir}/etc"
+  install -m 755 "${srcdir}/"${pkgname}-${pkgver}"/etc/barnyard.conf" "${pkgdir}/etc"
+  install -D -m644 LICENSE.QPL "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE.QPL"
+}
+
+
+# vim:set ts=2 sw=2 et:
+
