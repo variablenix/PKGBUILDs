@@ -9,10 +9,11 @@ url="http://barnyard.sourceforge.net"
 license=('QPL')
 backup=()
 options=(docs)
+install=barnyard.install
 source=("http://sourceforge.net/projects/barnyard/files/barnyard-0.2/0.2.0/${pkgname}-${pkgver}.tar.gz"
 "http://layer3link.info/builds/barnyard/barnyard-0.2.0-1.patch")
 sha512sums=('73424acf2e0c620b2f8f2f407d74812f7740234ce523e37557273998108c131311fffb16cfc2cea0f652d6b21072431081bad35b045f5654e2245786d27568e6'
-            '0fa9506d559c830621f5a4831d48fb17ca948d985ab8555a18ddd10404fb789ff95b3806a4c4b7eba1c8af8b667e5f390f1fa6355f0de009fb71f4e07c4aabb3')
+            '563972d84f1c7e95257d73f6d72cf9e58e69e625b4e84a3f3717fd8bae81794f64325e8335b6ee9cf39ee9d90ebcdfde48a57ecdc5b309db95b67004c8a236e0')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
@@ -31,4 +32,3 @@ package() {
 
 
 # vim:set ts=2 sw=2 et:
-
