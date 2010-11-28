@@ -26,7 +26,7 @@ package() {
   cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}/" install 
   install -d "${pkgdir}/etc"
-  install -m 755 "${srcdir}/"${pkgname}-${pkgver}"/etc/barnyard.conf" "${pkgdir}/etc"
+  install -m 644 "${srcdir}/"${pkgname}-${pkgver}"/etc/barnyard.conf" "${pkgdir}/etc"
   install -D -m644 LICENSE.QPL "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE.QPL"
 }
 
