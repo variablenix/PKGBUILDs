@@ -11,7 +11,7 @@ url="http://opensource.hld.ca/trac.cgi/wiki/CurseTheWeather/"
 license=('GPL')
 depends=('ncurses' 'python')
 source=(http://opensource.hld.ca/trac.cgi/export/317/trunk/ctw/dist/CurseTheWeather-$pkgver.tar.gz
-        http://variablenix.net/builds/cursetheweather/cursetheweather-0.6-2.patch)
+        https://github.com/variablenix/patch/blob/master/cursetheweather-0.6-2.patch)
 md5sums=('9594004e2483a2cc44fc8c420a7316e1'
          'a1bc153b379c4b894106fdcb75777eec')
 
