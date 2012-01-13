@@ -1,31 +1,38 @@
-# Maintainer: Tino Reichardt <milky dash archlinux at mcmilk dot de>
-# Contributor: CRT <crt dot 011 AT gmail.com>
-
+# Maintainer: Michal Zalewski <lcamtuf[at]coredump[dot]cx>
+# Contributor: cbreaker <cbreaker[at]tlen[dot]pl>]
 pkgname=p0f
-pkgver=2.0.8
+pkgver=3.00_rc3
 pkgrel=1
-pkgdesc="passive OS fingerprinting tool"
-arch=('any')
-license=("GPL")
-makedepends=('libpcap')
-url="http://lcamtuf.coredump.cx/p0f.shtml"
-source=(http://lcamtuf.coredump.cx/p0f/$pkgname-$pkgver.tgz)
-md5sums=('1ccbcd8d4c95ef6dae841120d23c56a5')
+pkgdesc="Purely passive TCP/IP traffic fingerprinting tool "
+url="http://lcamtuf.coredump.cx/p0f3/"
+arch=('x86_64' 'i686')
+license=('GPLv3')
+depends=('libpcap')
+source=("http://lcamtuf.coredump.cx/p0f3/p0f-3.00-rc3.tgz")
+md5sums=('ec4fe47f484c7e03670d4370f174bfb3')
+                                                
+	build() {
+	  cd "${srcdir}"
+          mv p0f-3.00-rc3 "${pkgname}-${pkgver}"
+          cd "${srcdir}/${pkgname}-${pkgver}"
+          sed -e 's/"p0f.fp"/"\/etc\/p0f\/p0f.fp"/g' -i config.h
+	  make
+	  ## additional tools
+	  # make p0f-client
+	  # make-p0f-sendsyn
+	  # make p0f-sendsyn6 # IPv6 support 
+	}
+                                                                                      
+        package() {
+	  cd "${srcdir}/${pkgname}-${pkgver}"
+          install -d -Dm755 ${pkgdir}/usr/sbin
+          install -d -Dm755 ${pkgdir}/etc/p0f
+                                                                                                                                                                                                                                  	   
+          install -m744 p0f ${pkgdir}/usr/sbin
+          install -m755 p0f.fp ${pkgdir}/etc/p0f
 
-build() {
-	cd ${srcdir}/${pkgname}
-	make
-}
-
-package() {
-	cd ${srcdir}/${pkgname}
-	install -d -Dm755 ${pkgdir}/usr/sbin
-	install -d -Dm755 ${pkgdir}/etc/p0f
-	install -d -Dm755 ${pkgdir}/usr/man/man1
-	install -d -Dm755 ${pkgdir}/usr/share/licenses/${pkgname}
-	
-	install -D -m644 doc/COPYING ${pkgdir}/usr/share/licenses/${pkgname}/p0f
-    	install -m744 ${srcdir}/${pkgname}/p0f p0frep ${pkgdir}/usr/sbin
-	install -m644 p0f.fp p0fa.fp p0fr.fp p0fo.fp ${pkgdir}/etc/p0f
-	install -m644 p0f.1 ${pkgdir}/usr/man/man1
-}
+	  ## additional tools
+	  # install -m744 ${srcdir}/p0f-3.00-rc3/tools/p0f-client ${pkgdir}/usr/sbin
+	  # install -m744 ${srcdir}/p0f-3.00-rc3/tools/p0f-sendsyn ${pkgdir}/usr/sbin
+	  # install -m744 ${srcdir}/p0f-3.00-rc3/tools/p0f-sendsyn6 ${pkgdir}/usr/sbin # IPv6 support
+	}
