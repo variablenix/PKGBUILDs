@@ -5,12 +5,12 @@
 # Contributor: Paul-Sebastian Manole <brokenthorn@gmail.com>
 # Contributor: Timothée Ravier <tim@siosm.fr>
 # Contributor: Christoph Stahl <christoph.stahl@uni-dortmund.de>
-# Maintainer: CRT <crt@archlinux.email>
+# Mainainer: TC <crt@archlinux.email>
 
 pkgname=prosody
 pkgrel=1
 pkgver=0.9.12
-pkgdesc="Lightweight and extensible Jabber/XMPP server written in Lua (development build from trunk-branch)"
+pkgdesc="Lightweight and extensible Jabber/XMPP server written in Lua"
 arch=('i686' 'x86_64')
 url="https://prosody.im/"
 license=('MIT')
@@ -26,12 +26,14 @@ backup=('etc/prosody/prosody.cfg.lua')
 source=("https://prosody.im/downloads/source/$pkgname-$pkgver.tar.gz"
         'prosody.tmpfile.d'
         'sysuser.conf'
-        'prosody.service')
+        'prosody.service'
+        'prosody.logrotated')
 
 md5sums=('d743adea6cfbaacc3a24cc0c3928bb1b'
          'dc8405a6a235b83dc8a0dcdf7b71cbaa'
          '385ca73d9f6046f3636266ce9bf38797'
-         'e5957c72ed81f9ade2dd7a08bec21fdb')
+         'e5957c72ed81f9ade2dd7a08bec21fdb'
+         '5b44aee99f1fa9e7f055e067688cafbd')
 
 prepare() {
   cd "${pkgname}-${pkgver}"
@@ -74,6 +76,7 @@ package() {
   install -Dm 0644 "$srcdir"/prosody.tmpfile.d "${pkgdir}"/usr/lib/tmpfiles.d/prosody.conf
   install -Dm 0644 "$srcdir"/prosody.service "${pkgdir}"/usr/lib/systemd/system/prosody.service
   install -Dm644 "$srcdir"/sysuser.conf "$pkgdir"/usr/lib/sysusers.d/prosody.conf
+  install -Dm640 "$srcdir"/prosody.logrotated "$pkgdir"/etc/logrotate.d/prosody
 
   for i in tools/*.lua; do
     install -Dm 0644 ${i} "${pkgdir}"/usr/share/prosody/${i}
