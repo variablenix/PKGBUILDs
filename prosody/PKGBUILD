@@ -1,11 +1,10 @@
-# $Id: PKGBUILD 196043 2016-11-16 17:20:21Z spupykin $
+# Mainainer: TC <crt@archlinux.email>
 # Old Maintainer: Sergej Pupykin <pupykin.s+arch@gmail.com>
 # Old Maintainer: Dwayne Bent <dbb@dbb.io>
 # Old Maintainer: Tilman Vatteroth <tilman.vatteroth@uni-dortmund.de>
 # Contributor: Paul-Sebastian Manole <brokenthorn@gmail.com>
 # Contributor: Timothée Ravier <tim@siosm.fr>
 # Contributor: Christoph Stahl <christoph.stahl@uni-dortmund.de>
-# Mainainer: TC <crt@archlinux.email>
 
 pkgname=prosody
 pkgrel=1
