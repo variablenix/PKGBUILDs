@@ -1,4 +1,4 @@
-# openldap
+# OpenLDAP PKGBUILD
 
 This OpenLDAP PKGBUILD is the build from the Arch [core] repo. The difference with this build is it enables the following additional modules:
 
